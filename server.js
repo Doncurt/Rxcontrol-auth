@@ -28,7 +28,8 @@ app.use(passport.session()); // persistent login sessions
 
 //Models
 var models = require("./app/models");
-
+//passport stretgy
+require('./app/config/passport/passportdoc.js')(passport, models.user);
 //Sync Database
 models.sequelize.sync().then(function() {
 
@@ -40,18 +41,20 @@ models.sequelize.sync().then(function() {
 
 });
 //Routes
-//pharmacy sign up route
-app.get('/pharmsignup', function(req, res) {
-
-    res.render('pharmsignup');
-
-});
-//doct signup route
-app.get('/docsignup', function(req, res) {
-
-    res.render('docsignup');
-
-});
+//Routes
+const authRoute = require('./app/routes/auth.js')(app);
+// //pharmacy sign up route
+// app.get('/pharmsignup', function(req, res) {
+//
+//     res.render('pharmsignup');
+//
+// });
+// //doct signup route
+// app.get('/docsignup', function(req, res) {
+//
+//     res.render('docsignup');
+//
+// });
 app.get('/login', function(req, res) {
 
     res.render('login');
