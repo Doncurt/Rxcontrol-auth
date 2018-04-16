@@ -14,7 +14,19 @@ module.exports = (sequelize, DataTypes) => {
     phone: {type:DataTypes.STRING,unique:true,allowNull: false},
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
-  }, {});
+  }, {
+
+          freezeTableName: true,
+          instanceMethods: {
+              generateHash(password) {
+                  return bcrypt.hash(password, bcrypt.genSaltSync(8));
+              },
+              validPassword(password) {
+                  return bcrypt.compare(password, this.password);
+              }
+          }
+
+  });
   Provider.associate = function(models) {
     // associations can be defined here
   };

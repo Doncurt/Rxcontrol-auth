@@ -23,13 +23,19 @@ app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true}))
 app.use(passport.initialize());
 
 app.use(passport.session()); // persistent login sessions
-//ROUTES
-
 
 //Models
 var models = require("./app/models");
-//passport stretgy
-require('./app/config/passport/passportdoc.js')(passport, models.user);
+//ROUTES
+
+
+app.get('/', function(req, res) {
+
+    res.send('Welcome to Passport with Sequelize');
+
+});
+const authRoute = require('./app/routes/auth.js')(app,passport);
+
 //Sync Database
 models.sequelize.sync().then(function() {
 
@@ -40,32 +46,7 @@ models.sequelize.sync().then(function() {
     console.log(err, "Something went wrong with the Database Update!")
 
 });
-//Routes
-//Routes
-const authRoute = require('./app/routes/auth.js')(app);
-// //pharmacy sign up route
-// app.get('/pharmsignup', function(req, res) {
-//
-//     res.render('pharmsignup');
-//
-// });
-// //doct signup route
-// app.get('/docsignup', function(req, res) {
-//
-//     res.render('docsignup');
-//
-// });
-app.get('/login', function(req, res) {
 
-    res.render('login');
-
-});
-
-app.get('/', function(req, res) {
-
-    res.send('Welcome to Passport with Sequelize');
-
-});
 
 
 app.listen(5000, function(err) {
