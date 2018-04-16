@@ -13,12 +13,11 @@ module.exports = function(app) {
     app.get('/docsignup', authController.docsignup);
     app.get('/pharmsignup',authController.pharmsignup);
 
-    // app.post('/docsignup',function(req,res){
+    app.post('/docsignup',function(req,res){
     //axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
     //   axios.get('path/to/hippa/api')
     //       .then(response => {
-    //         console.log(response.data.url);
-    //         console.log(response.data.explanation);
+
     //       })
     //       .catch(error => {
     //         alert('Information not found in HIPPA, please verify information or Contact HIPPA');
@@ -36,8 +35,7 @@ app.post('/pharmsignup', function(req,res){
   // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
   // axios.get('path/to/hippa/api')
   //     .then(response => {
-  //       console.log(response.data.url);
-  //       console.log(response.data.explanation);
+
   //     })
   //     .catch(error => {
   //       alert('Information not found in HIPPA, please verify information or Contact HIPPA');
