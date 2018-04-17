@@ -56,25 +56,26 @@ app.post('/pharmsignup', function(req,res){
         Provider.findOne({ where: { username: username } }).then(function (user) {
             if (!user) {
 
-                res.redirect('/login');
+                res.redirect('/doclogin');
             } else if (!user.validPassword(password)) {
-                res.redirect('/login');
+                res.redirect('/doclogin');
             } else {
                 req.session.user = user.dataValues;
                 res.redirect('/dashboard');
             }
         });
       });
-    //     // Login for Providers
+
+    // Login for Providers
             app.post('/pharmlogin',function(req, res) {
                 var email = req.body.email,
                  password = req.body.password;
                 Pharmacy.findOne({ where: { username: username } }).then(function (user) {
                     if (!user) {
 
-                        res.redirect('/login');
+                        res.redirect('/pharmlogin');
                     } else if (!user.validPassword(password)) {
-                        res.redirect('/login');
+                        res.redirect('/pharmlogin');
                     } else {
                         req.session.user = user.dataValues;
                         res.redirect('/dashboard');
