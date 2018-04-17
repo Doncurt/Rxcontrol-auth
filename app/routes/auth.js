@@ -53,14 +53,14 @@ app.post('/pharmsignup', function(req,res){
     app.post('/doclogin',function(req, res) {
         var email = req.body.email,
          password = req.body.password;
-        Provider.findOne({ where: { username: username } }).then(function (user) {
-            if (!user) {
+        model.Provider.findOne({ where: { email: email } }).then(function (pharmacy) {
+            if (!pharmacy) {
 
                 res.redirect('/doclogin');
-            } else if (!user.validPassword(password)) {
+            } else if (!pharmacy.validPassword(password)) {
                 res.redirect('/doclogin');
             } else {
-                req.session.user = user.dataValues;
+                req.session.pharmacy = pharmacy.dataValues;
                 res.redirect('/dashboard');
             }
         });
@@ -70,14 +70,14 @@ app.post('/pharmsignup', function(req,res){
             app.post('/pharmlogin',function(req, res) {
                 var email = req.body.email,
                  password = req.body.password;
-                Pharmacy.findOne({ where: { username: username } }).then(function (user) {
-                    if (!user) {
+                model.Pharmacy.findOne({ where: { email: email } }).then(function (pharmacy) {
+                    if (!pharmacy) {
 
                         res.redirect('/pharmlogin');
-                    } else if (!user.validPassword(password)) {
+                    } else if (!pharmacy.validPassword(password)) {
                         res.redirect('/pharmlogin');
                     } else {
-                        req.session.user = user.dataValues;
+                        req.session.pharmacy = pharmacy.dataValues;
                         res.redirect('/dashboard');
                     }
                 });
